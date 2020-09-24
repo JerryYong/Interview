@@ -1,13 +1,30 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class MiniCode {
+    ArrayList digits;
+    ArrayList tens;
+
+    public void setDigits(ArrayList digits) {
+        this.digits = digits;
+    }
+
+    public void setTens(ArrayList tens) {
+        this.tens = tens;
+    }
+
+    public ArrayList getDigits() {
+        return digits;
+    }
+
+    public ArrayList getTens() {
+        return tens;
+    }
+
     public static void main(String[] args) {
+        MiniCode miniCode = new MiniCode();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please enter digits");
         String getDigits = scanner.nextLine();
-        ArrayList digits = new ArrayList();
-        ArrayList tens = new ArrayList();
         char[] array = getDigits.toCharArray();
         for (int i=0;i<array.length ; i++) {
             ArrayList list = new ArrayList();
@@ -56,28 +73,30 @@ public class MiniCode {
                     break;
             }
             if (i == 0){
-                digits = list;
+                miniCode.setDigits(list);
             }else if (i == 1){
-                tens = list;
+                miniCode.setTens(list);
             }
         }
-        if (digits!=null&&digits.size()>0&&tens.size()==0) {
-            for (int i = 0; i < digits.size(); i++) {
-                System.out.print(digits.get(i) + "  ");
+        if ((miniCode.getDigits()!=null&&miniCode.getDigits().size()>0)&&(miniCode.getTens()==null||miniCode.getTens().size()==0)){
+            for (int i = 0; i < miniCode.getDigits().size(); i++) {
+                System.out.print(miniCode.getDigits().get(i) + "  ");
             }
         }
-        if (tens!=null&&tens.size()>0&&digits.size()==0) {
-            for (int j = 0; j < tens.size(); j++) {
-                System.out.print(tens.get(j) + "  ");
+        if (miniCode.getTens()!=null&&miniCode.getTens().size()>0&&miniCode.getDigits().size()==0) {
+            for (int j = 0; j < miniCode.getTens().size(); j++) {
+                System.out.print(miniCode.getTens().get(j) + "  ");
             }
         }
-        if (digits!=null&&digits.size()>0&&tens!=null&&tens.size()>0) {
-            for (int i = 0; i < digits.size(); i++) {
-                for (int j = 0; j < tens.size(); j++) {
-                    System.out.print(digits.get(i));
-                    System.out.print(tens.get(j) + "  ");
+        if (miniCode.getDigits()!=null&&miniCode.getDigits().size()>0&&miniCode.getTens()!=null&&miniCode.getTens().size()>0) {
+            for (int i = 0; i < miniCode.getDigits().size(); i++) {
+                for (int j = 0; j < miniCode.getTens().size(); j++) {
+                    System.out.print(miniCode.getDigits().get(i));
+                    System.out.print(miniCode.getTens().get(j) + "  ");
                 }
             }
         }
     }
+
+
 }
