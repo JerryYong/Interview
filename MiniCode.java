@@ -1,4 +1,7 @@
+import io.swagger.models.auth.In;
+
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class MiniCode {
     ArrayList digits;
@@ -23,10 +26,15 @@ public class MiniCode {
     public static void main(String[] args) {
         MiniCode miniCode = new MiniCode();
         Scanner scanner = new Scanner(System.in);
+        Pattern pattern = Pattern.compile("[0-9]*");
         System.out.println("Please enter digits");
         String getDigits = scanner.nextLine();
+        while (!pattern.matcher(getDigits).matches() || Integer.parseInt(getDigits) > 99) {
+            System.out.println("The digits you filled was invalid ,please fill again");
+            getDigits = scanner.nextLine();
+        }
         char[] array = getDigits.toCharArray();
-        for (int i=0;i<array.length ; i++) {
+        for (int i = 0; i < array.length; i++) {
             ArrayList list = new ArrayList();
             switch (array[i]) {
                 case '2':
@@ -72,12 +80,13 @@ public class MiniCode {
                     list.add("Z");
                     break;
             }
-            if (i == 0){
+            if (i == 0) {
                 miniCode.setDigits(list);
-            }else if (i == 1){
+            } else if (i == 1) {
                 miniCode.setTens(list);
             }
         }
+
         if ((miniCode.getDigits()!=null&&miniCode.getDigits().size()>0)&&(miniCode.getTens()==null||miniCode.getTens().size()==0)){
             for (int i = 0; i < miniCode.getDigits().size(); i++) {
                 System.out.print(miniCode.getDigits().get(i) + "  ");
